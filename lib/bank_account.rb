@@ -32,9 +32,13 @@ class BankAccount
 
   def statement(amount)
     time = Time.new
-    time = "#{time.day}/#{time.month}/#{time.year}"
+    time = "#{prepend_zero(time.day)}/#{prepend_zero(time.month)}/#{time.year}"
     @transactions.push([amount, time])
     return @transactions[-1]
+  end
+
+  def prepend_zero(number)
+    sprintf("%02d", number)
   end
 
 end

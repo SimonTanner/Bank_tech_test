@@ -42,4 +42,18 @@ describe BankAccount do
         expect(new_account.balance).to eq("£250.00")
       end
     end
+
+    describe "statement" do
+      it "takes 1 argument" do
+        new_account = BankAccount.new("John Smith")
+        new_account.deposit(1000)
+        expect(new_account).to respond_to(:statement).with(1).argument
+      end
+
+      it "stores the date of a transaction and the amount" do
+        new_account = BankAccount.new("John Smith")
+        new_account.deposit(1000)
+        expect(new_account.statement(500)).to include(500, "12/6/2017")
+      end
+    end
 end

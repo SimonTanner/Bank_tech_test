@@ -2,11 +2,13 @@
 
 class BankAccount
   @username
+  @transactions
   ACCOUNT_BALANCE = 0.00
 
   def initialize(username)
     username = username.split(" ")
     @username = username
+    @transactions = []
     @balance = ACCOUNT_BALANCE
   end
 
@@ -26,6 +28,13 @@ class BankAccount
   def debit(amount)
     @balance -= amount
     balance
+  end
+
+  def statement(amount)
+    time = Time.new
+    time = "#{time.day}/#{time.month}/#{time.year}"
+    @transactions.push([amount, time])
+    return @transactions[-1]
   end
 
 end

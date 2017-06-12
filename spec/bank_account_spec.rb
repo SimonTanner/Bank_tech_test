@@ -16,4 +16,16 @@ describe BankAccount do
     end
   end
 
+    describe "deposit" do
+      it "will take 1 argument" do
+        new_account = BankAccount.new("John Smith")
+        expect(new_account).to respond_to(:deposit).with(1).argument
+      end
+
+      it "will a float as an arguement and add this to the balance" do
+        new_account = BankAccount.new("John Smith")
+        new_account.deposit(500.00)
+        expect(new_account.balance).to eq("£500.00")
+      end
+    end
 end

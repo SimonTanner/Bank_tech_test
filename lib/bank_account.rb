@@ -7,6 +7,7 @@ class BankAccount
   def initialize(username)
     username = username.split(" ")
     @username = username
+    @balance = ACCOUNT_BALANCE
   end
 
   def username
@@ -14,7 +15,12 @@ class BankAccount
   end
 
   def balance
-    return "£#{sprintf("%.2f", ACCOUNT_BALANCE)}"
+    return "£#{sprintf("%.2f", @balance)}"
+  end
+
+  def deposit(amount)
+    @balance += amount
+    balance
   end
 
 end

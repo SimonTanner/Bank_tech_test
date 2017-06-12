@@ -51,16 +51,16 @@ describe BankAccount do
     end
 
     describe "statement" do
-      it "takes 1 argument" do
+      it "takes 2 argument" do
         new_account = BankAccount.new("John Smith")
         new_account.deposit(1000)
-        expect(new_account).to respond_to(:statement).with(1).argument
+        expect(new_account).to respond_to(:statement).with(2).arguments
       end
 
       it "stores the date of a transaction and the amount" do
         new_account = BankAccount.new("John Smith")
         new_account.deposit(1000)
-        expect(new_account.statement(500)).to include(500, "12/06/2017")
+        expect(new_account.statement(500, "debit")).to include(500, "12/06/2017")
       end
     end
 end

@@ -22,18 +22,26 @@ class BankAccount
 
   def deposit(amount)
     @balance += amount
+    type = "deposit"
+    statement(amount, type)
     balance
   end
 
   def debit(amount)
     @balance -= amount
+    type = "deposit"
+    statement(amount, type)
     balance
   end
 
-  def statement(amount)
+  def statement(amount, type)
     time = Time.new
     time = "#{prepend_zero(time.day)}/#{prepend_zero(time.month)}/#{time.year}"
-    @transactions.push([amount, time])
+    if type == "deposit"
+      @transactions.push([amount, " ", time])
+    else
+      @transactions.push([" ", amount, time])
+    end
     return @transactions[-1]
   end
 

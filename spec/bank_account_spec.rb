@@ -60,7 +60,17 @@ describe BankAccount do
       it "stores the date of a transaction and the amount" do
         new_account = BankAccount.new("John Smith")
         new_account.deposit(1000)
-        expect(new_account.statement(500, "debit")).to include(500, "12/06/2017")
+        expect(new_account.statement(500, "debit")).to include("12/06/2017", 500, 1000)
+      end
+    end
+
+    describe "print_statement" do
+      it "prints a list of transactions" do
+        new_account = BankAccount.new("John Smith")
+        new_account.deposit(1000)
+        new_account.debit(750)
+        new_account.deposit(400)
+        expect(new_account.print_statement).to eq("date || credit || debit || balance \n 12/06/2017 || 1000 || || 1000 \n 12/06/2017 || || 750 || 250 \n 12/06/2017 || 400 || || 650")
       end
     end
 end

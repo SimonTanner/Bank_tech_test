@@ -35,18 +35,26 @@ class BankAccount
   end
 
   def statement(amount, type)
-    time = Time.new
-    time = "#{prepend_zero(time.day)}/#{prepend_zero(time.month)}/#{time.year}"
+    date = Time.new
+    date = "#{prepend_zero(date.day)}/#{prepend_zero(date.month)}/#{date.year}"
     if type == "deposit"
-      @transactions.push([amount, " ", time])
+      @transactions.push([date, amount, " ", @balance])
     else
-      @transactions.push([" ", amount, time])
+      @transactions.push([date, " ", amount, @balance])
     end
-    return @transactions[-1]
+    #return @transactions[-1]
   end
 
   def prepend_zero(number)
     sprintf("%02d", number)
+  end
+
+  def print_statement
+    temp = []
+    @transactions.each {|date, credit, debit, balance| temp.push(" #{date} || #{credit} || #{debit} || #{balance} ")}
+    temp = temp.join("/n")
+    print temp
+    return temp
   end
 
 end

@@ -28,4 +28,18 @@ describe BankAccount do
         expect(new_account.balance).to eq("£500.00")
       end
     end
+
+    describe "debit" do
+      it "it takes a number as an argument" do
+        new_account = BankAccount.new("John Smith")
+        expect(new_account).to respond_to(:debit).with(1).argument
+      end
+
+      it "takes an amount and subtracts it from the account balance" do
+        new_account = BankAccount.new("John Smith")
+        new_account.deposit(1000)
+        new_account.debit(750)
+        expect(new_account.balance).to eq("£250.00")
+      end
+    end
 end
